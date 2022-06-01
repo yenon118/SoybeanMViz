@@ -47,8 +47,11 @@ function getMotifWeblogo(motif, gene, chromosome, motif_start, motif_end, motif_
             let detail_tr_index = document.createElement("tr");
             let detail_tr_position = document.createElement("tr");
             let detail_tr_nucleotide = document.createElement("tr");
+            let detail_tr_ref_alt = document.createElement("tr");
 
             for (let i = 0; i < (motif_end-motif_start+1); i++) {
+                var ref_alt = '';
+
                 var detail_th = document.createElement("th");
                 detail_th.setAttribute("style", "border:1px solid black; min-width:80px;");
                 detail_th.innerHTML = Number(i)+1;
@@ -68,17 +71,32 @@ function getMotifWeblogo(motif, gene, chromosome, motif_start, motif_end, motif_
                     let alternate_allele_array = String(chrom_pos_ref_alt_dict[position]['Alternate_Allele']).split(",");
 
                     if (motif_sequence[i] == reference_allele) {
-                        detail_td.style.color = '#63CC06';
+                        detail_td.style.backgroundColor = '#9EE85C';
+                        ref_alt = 'Ref';
                     } else if (alternate_allele_array.includes(motif_sequence[i])) {
-                        detail_td.style.color = '#F26A55';
+                        detail_td.style.backgroundColor = '#F26A55';
+                        ref_alt = 'Alt';
                     }
                 }
                 detail_tr_nucleotide.appendChild(detail_td);
+
+                var detail_td = document.createElement("td");
+                detail_td.setAttribute("style", "border:1px solid black; min-width:80px;");
+                if (ref_alt == 'Ref') {
+                    detail_td.innerHTML = 'Reference (Wm82.a2.v1)';
+                } else if (ref_alt == 'Alt') {
+                    detail_td.innerHTML = 'Alternate (Wm82.a2.v1)';
+                } else {
+                    detail_td.innerHTML = '';
+                }
+                ref_alt = ''
+                detail_tr_ref_alt.appendChild(detail_td);
             }
 
             detail_table.appendChild(detail_tr_index);
             detail_table.appendChild(detail_tr_position);
             detail_table.appendChild(detail_tr_nucleotide);
+            detail_table.appendChild(detail_tr_ref_alt);
 
             document.getElementById(gene+"_detail_table").appendChild(detail_table);
         },
