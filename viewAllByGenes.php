@@ -36,7 +36,7 @@ if (is_string($upstream_length_1)) {
 ?>
 
 <!-- Back button -->
-<a href="/mViz/"><button> &lt; Back </button></a>
+<a href="/SoybeanMViz/"><button> &lt; Back </button></a>
 
 <br />
 <br />
@@ -120,10 +120,8 @@ for ($i = 0; $i < count($gene_result_arr); $i++) {
 
             echo "<tr bgcolor=\"" . $tr_bgcolor . "\">";
             foreach ($motif_result_arr[$j] as $key => $value) {
-                if ($key == "Gene") {
-                    echo "<td style=\"border:1px solid black; min-width:80px;\"><a target=\"_blank\" href=\"../SoybeanAlleleCatalogTool/viewAllByGenes.php?dataset1=Soy1066_Allele_Catalog&gene1=" . $value . "&Soja=Soja&Elite=Elite&Landrace=Landrace&Cultivar=Cultivar&Imputed=Imputed&Unimputed=Unimputed\">" . $value . "</a></td>";
-                } else if ($key == "Motif") {
-                    echo "<td style=\"border:1px solid black; min-width:80px;\"><a href=\"javascript:void(0);\" onclick=\"getMotifWeblogo('" . $value . "', '" . $gene_result_arr[$i]['Name'] . "', '" . $motif_result_arr[$j]['Start'] . "', '" . $motif_result_arr[$j]['End'] . "', '" . $motif_result_arr[$j]['Sequence'] . "')\">" . $value . "</a></td>";
+                if ($key == "Motif") {
+                    echo "<td style=\"border:1px solid black; min-width:80px;\"><a href=\"javascript:void(0);\" onclick=\"getMotifWeblogo('" . $value . "', '" . $gene_result_arr[$i]['Name'] . "', '" . $gene_result_arr[$i]['Chromosome'] . "', '" . $motif_result_arr[$j]['Start'] . "', '" . $motif_result_arr[$j]['End'] . "', '" . $motif_result_arr[$j]['Sequence'] . "')\">" . $value . "</a></td>";
                 } else {
                     echo "<td style=\"border:1px solid black; min-width:80px;\">" . $value . "</td>";
                 }
@@ -137,15 +135,15 @@ for ($i = 0; $i < count($gene_result_arr); $i++) {
         echo "<br />";
 
         // Div tags for selected motif, weblogo, and motif sequence table
-        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_b\" style='width:auto; height:auto; overflow:scroll; max-height:1000px;'></div>";
-        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_weblogo\" style='width:auto; height:auto; overflow:scroll; max-height:1000px;'></div>";
-        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_detail_table\" style='width:auto; height:auto; overflow:scroll; max-height:1000px;'></div>";
+        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_b\" style='width:auto; height:auto; overflow:visible; max-height:1000px;'></div>";
+        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_weblogo\" style='width:auto; height:auto; overflow:visible; max-height:1000px;'></div>";
+        echo "<div id=\"" . $gene_result_arr[$i]['Name'] . "_detail_table\" style='width:auto; height:auto; overflow:visible; max-height:1000px;'></div>";
 
         echo "<br />";
         echo "<br />";
     } else {
         // Display no motif message if none is found
-        echo "<div style='width:auto; height:auto; overflow:scroll; max-height:1000px;'>";
+        echo "<div style='width:auto; height:auto; overflow:visible; max-height:1000px;'>";
         echo "No motif found!!!";
         echo "</div>";
 

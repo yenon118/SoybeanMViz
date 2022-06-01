@@ -8,9 +8,9 @@ include '../header.php';
         <tr>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
                 <form action="viewAllByGenes.php" method="get" target="_blank">
-                    <h2>Search By Gene Name</h2>
+                    <h2>Search By Gene IDs</h2>
                     <br />
-                    <label for="gene_name_1"><b>Gene name:</b> (eg Glyma.01G049100 Glyma.01G049200 Glyma.01G049300)</label>
+                    <label for="gene_name_1"><b>Gene IDs:</b> (eg Glyma.01G049100 Glyma.01G049200 Glyma.01G049300)</label>
                     <textarea id="gene_name_1" name="gene_name_1" rows="8" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01g049100&#10;Glyma.01g049200&#10;Glyma.01g049300"></textarea>
                     <br />
                     <br />
