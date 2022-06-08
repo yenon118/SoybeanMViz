@@ -53,17 +53,17 @@ function getMotifWeblogo(motif, gene, chromosome, motif_start, motif_end, motif_
                 var ref_alt = '';
 
                 var detail_th = document.createElement("th");
-                detail_th.setAttribute("style", "border:1px solid black; min-width:80px;");
+                detail_th.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
                 detail_th.innerHTML = Number(i)+1;
                 detail_tr_index.appendChild(detail_th);
 
                 var detail_th = document.createElement("th");
-                detail_th.setAttribute("style", "border:1px solid black; min-width:80px;");
+                detail_th.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
                 detail_th.innerHTML = Number(motif_start)+Number(i);
                 detail_tr_position.appendChild(detail_th);
 
                 var detail_td = document.createElement("td");
-                detail_td.setAttribute("style", "border:1px solid black; min-width:80px;");
+                detail_td.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
                 detail_td.innerHTML = motif_sequence[i];
                 if (Object.keys(chrom_pos_ref_alt_dict).includes(String(Number(motif_start)+Number(i)))) {
                     let position = String(Number(motif_start)+Number(i));
@@ -81,7 +81,7 @@ function getMotifWeblogo(motif, gene, chromosome, motif_start, motif_end, motif_
                 detail_tr_nucleotide.appendChild(detail_td);
 
                 var detail_td = document.createElement("td");
-                detail_td.setAttribute("style", "border:1px solid black; min-width:80px;");
+                detail_td.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
                 if (ref_alt == 'Ref') {
                     detail_td.innerHTML = 'Reference (Wm82.a2.v1)';
                 } else if (ref_alt == 'Alt') {
