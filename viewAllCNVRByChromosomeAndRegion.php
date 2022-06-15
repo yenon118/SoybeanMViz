@@ -30,11 +30,14 @@ $position_end_1 = intval(trim($position_end_1))+1;
 <?php
 
 // Check GRIN accession mapping
-$query_str = "SELECT * FROM soykb.mViz_Soybean_CNVS ";
-$query_str = $query_str . "WHERE (Chromosome = '" . $chromosome_1 . "') ";
-$query_str = $query_str . "AND (Start BETWEEN " . $position_start_1 . " AND " . $position_end_1 . ") ";
-$query_str = $query_str . "AND (End BETWEEN " . $position_start_1 . " AND " . $position_end_1 . ") ";
-$query_str = $query_str . "ORDER BY Accession, CN, Chromosome, Start, End; ";
+$query_str = "SELECT CNVR.Chromosome, CNVR.Start, CNVR.End, CNVR.Width, CNVR.Strand, AM.SoyKB_Accession AS Accession, CNVR.CN ";
+$query_str = $query_str . "FROM soykb.mViz_Soybean_CNVR AS CNVR ";
+$query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_Accession_Mapping AS AM ";
+$query_str = $query_str . "ON CNVR.Accession = AM.Accession ";
+$query_str = $query_str . "WHERE (CNVR.Chromosome = '" . $chromosome_1 . "') ";
+$query_str = $query_str . "AND (CNVR.Start BETWEEN " . $position_start_1 . " AND " . $position_end_1 . ") ";
+$query_str = $query_str . "AND (CNVR.End BETWEEN " . $position_start_1 . " AND " . $position_end_1 . ") ";
+$query_str = $query_str . "ORDER BY AM.SoyKB_Accession, CNVR.CN, CNVR.Chromosome, CNVR.Start, CNVR.End; ";
 
 $stmt = $PDO->prepare($query_str);
 $stmt->execute();

@@ -41,8 +41,11 @@ if (is_string($copy_number_1)) {
 <?php
 
 // Check GRIN accession mapping
-$query_str = "SELECT * FROM soykb.mViz_Soybean_CNVS ";
-$query_str = $query_str . "WHERE (Accession = '" . $accession_1 . "') AND (CN IN ('";
+$query_str = "SELECT CNVR.Chromosome, CNVR.Start, CNVR.End, CNVR.Width, CNVR.Strand, AM.SoyKB_Accession AS Accession, CNVR.CN ";
+$query_str = $query_str . "FROM soykb.mViz_Soybean_CNVR AS CNVR ";
+$query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_Accession_Mapping AS AM ";
+$query_str = $query_str . "ON CNVR.Accession = AM.Accession ";
+$query_str = $query_str . "WHERE (AM.SoyKB_Accession = '" . $accession_1 . "') OR (AM.GRIN_Accession = '" . $accession_1 . "') AND (CNVR.CN IN ('";
 for ($i = 0; $i < count($copy_number_arr); $i++) {
     if($i < (count($copy_number_arr)-1)){
         $query_str = $query_str . trim($copy_number_arr[$i]) . "', '";
@@ -51,7 +54,7 @@ for ($i = 0; $i < count($copy_number_arr); $i++) {
     }
 }
 $query_str = $query_str . "')) ";
-$query_str = $query_str . "ORDER BY CN, Chromosome, Start, End; ";
+$query_str = $query_str . "ORDER BY CNVR.CN, CNVR.Chromosome, CNVR.Start, CNVR.End; ";
 
 $stmt = $PDO->prepare($query_str);
 $stmt->execute();

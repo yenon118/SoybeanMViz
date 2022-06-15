@@ -38,7 +38,7 @@ include '../header.php';
         </tr>
         <tr>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllCNVSByChromosomeAndRegion.php" method="get" target="_blank">
+                <form action="viewAllCNVRByChromosomeAndRegion.php" method="get" target="_blank">
                     <h2>Search By Chromosome and Region</h2>
                     <br />
                     <label for="chromosome_1"><b>Chromosome:</b> (eg Chr01)</label>
@@ -47,11 +47,11 @@ include '../header.php';
                     <br />
                     <br />
                     <br />
-                    <label for="position_start_1"><b>Starting Position:</b> (eg 29325001)</label>
+                    <label for="position_start_1"><b>Starting Position:</b> (eg 41175001)</label>
                     <input type="text" id="position_start_1" name="position_start_1" size="60">
                     <br />
                     <br />
-                    <label for="position_end_1"><b>Ending Position:</b> (eg 29425000)</label>
+                    <label for="position_end_1"><b>Ending Position:</b> (eg 41775000)</label>
                     <input type="text" id="position_end_1" name="position_end_1" size="60">
                     <br />
                     <br />
@@ -63,15 +63,15 @@ include '../header.php';
                 </form>
             </td>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllCNVSByAccessionAndCopyNumbers.php" method="get" target="_blank">
+                <form action="viewAllCNVRByAccessionAndCopyNumbers.php" method="get" target="_blank">
                     <h2>Search By Accession and Copy Numbers</h2>
                     <br />
-                    <label for="accession_1"><b>Accession:</b> (eg CRR108616)</label>
+                    <label for="accession_1"><b>Accession:</b> (eg PI_479752)</label>
                     <input type="text" id="accession_1" name="accession_1" size="60">
                     <br />
                     <br />
                     <label for="copy_number_1"><b>Copy Numbers:</b> (eg CN0 CN1 CN3 CN4 CN5 CN6 CN7 CN8)</label>
-                    <textarea id="copy_number_1" name="copy_number_1" rows="10" cols="50" placeholder="&#10;Please separate each copy number into a new line. &#10;&#10;Example:&#10;CN0&#10;CN1&#10;CN3&#10;&#10;**There is no CN2 as CN2 represents normal."></textarea>
+                    <textarea id="copy_number_1" name="copy_number_1" rows="10" cols="50" placeholder="&#10;Please separate each copy number into a new line. &#10;&#10;Example:&#10;CN0&#10;CN1&#10;CN3&#10;&#10;**CN2 represents normal."></textarea>
                     <br />
                     <br />
                     <input type="submit" value="Search">
