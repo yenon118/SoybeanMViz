@@ -45,7 +45,7 @@ $query_str = "SELECT CNVR.Chromosome, CNVR.Start, CNVR.End, CNVR.Width, CNVR.Str
 $query_str = $query_str . "FROM soykb.mViz_Soybean_CNVR AS CNVR ";
 $query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_Accession_Mapping AS AM ";
 $query_str = $query_str . "ON CNVR.Accession = AM.Accession ";
-$query_str = $query_str . "WHERE (AM.SoyKB_Accession = '" . $accession_1 . "') OR (AM.GRIN_Accession = '" . $accession_1 . "') AND (CNVR.CN IN ('";
+$query_str = $query_str . "WHERE ((AM.SoyKB_Accession = '" . $accession_1 . "') OR (AM.GRIN_Accession = '" . $accession_1 . "')) AND (CNVR.CN IN ('";
 for ($i = 0; $i < count($copy_number_arr); $i++) {
     if($i < (count($copy_number_arr)-1)){
         $query_str = $query_str . trim($copy_number_arr[$i]) . "', '";

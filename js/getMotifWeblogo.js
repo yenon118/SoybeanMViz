@@ -23,7 +23,7 @@ function getMotifWeblogo(motif, gene, chromosome, motif_start, motif_end, motif_
     document.getElementById(gene+"_weblogo").appendChild(weblogo);
 
     $.ajax({
-        url: 'php/query_chrom_pos_ref_alt.php',
+        url: 'php/queryChromPosRefAlt.php',
         type: 'GET',
         contentType: 'application/json',
         data: {

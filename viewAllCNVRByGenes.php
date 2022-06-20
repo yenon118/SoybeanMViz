@@ -155,6 +155,7 @@ if(isset($cnvr_result_arr) && is_array($cnvr_result_arr) && !empty($cnvr_result_
         foreach ($cnvr_result_arr[$j] as $key => $value) {
             echo "<td style=\"border:1px solid black; min-width:80px;\">" . $value . "</td>";
         }
+        echo "<td><a href=\"/SoybeanMViz/viewCNVRAndPhenotype.php?chromosome_1=" . $cnvr_result_arr[$j]["Chromosome"] . "&position_start_1=" . $cnvr_result_arr[$j]["Start"] . "&position_end_1=" . $cnvr_result_arr[$j]["End"] . "\" target=\"_blank\" ><button>View Details</button></a></td>";
         echo "</tr>";
     }
 
