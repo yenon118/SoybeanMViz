@@ -10,7 +10,7 @@ include '../header.php';
         </tr>
         <tr>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllMotifByGenes.php" method="get" target="_blank">
+                <form action="viewAllPromotersByGenes.php" method="get" target="_blank">
                     <h2>Search By Gene IDs</h2>
                     <br />
                     <label for="gene_name_1"><b>Gene IDs:</b> (eg Glyma.01G049100 Glyma.01G049200 Glyma.01G049300)</label>
@@ -85,6 +85,28 @@ include '../header.php';
                     <br />
                     <label for="gene_id_2"><b>Gene IDs</b><span>&nbsp;(eg Glyma.01G000100 Glyma.02G001700 Glyma.03G018100)</span></label>
                     <textarea id="gene_id_2" name="gene_id_2" rows="12" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01G000100&#10;Glyma.02G001700&#10;Glyma.03G018100"></textarea>
+                    <br />
+                    <br />
+                    <input type="submit" value="Search">
+                </form>    
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td><h2>Transposable Element Search</h2></td>
+        </tr>
+        <tr>
+            <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
+                <form action="viewAllTransposableElementsRByGenes.php" method="get" target="_blank">
+                    <h2>Search by Gene IDs</h2>
+                    <br />
+                    <label for="gene_id_3"><b>Gene IDs</b><span>&nbsp;(eg Glyma.01G000100 Glyma.02G001700 Glyma.03G018100)</span></label>
+                    <textarea id="gene_id_3" name="gene_id_3" rows="12" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01G000100&#10;Glyma.02G001700&#10;Glyma.03G018100"></textarea>
                     <br />
                     <br />
                     <input type="submit" value="Search">

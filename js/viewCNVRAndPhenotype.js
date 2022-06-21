@@ -74,7 +74,7 @@ function constructInfoTable(res) {
         detail_tr.style.backgroundColor = ((i%2) ? "#FFFFFF" : "#DDFFDD");
         for (let j = 0; j < header_array.length; j++) {
             var detail_td = document.createElement("td");
-            detail_td.setAttribute("style", "min-width:80px; height:18.5px;");
+            detail_td.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
             detail_td.innerHTML = res[i][header_array[j]];
             detail_tr.appendChild(detail_td);
         }

@@ -192,7 +192,7 @@ if(isset($gene_result_arr) && is_array($gene_result_arr) && !empty($gene_result_
 
     $query_str = $query_str . ") AS CNVR ";
     $query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_GFF AS GFF ON ";
-    $query_str = $query_str . "(CNVR.Chromosome = GFF.Chromosome AND CNVR.Start < GFF.Start AND CNVR.End > GFF.End);";
+    $query_str = $query_str . "(CNVR.Chromosome = GFF.Chromosome AND CNVR.Start <= GFF.Start AND CNVR.End >= GFF.End);";
     $query_str = $query_str . "ORDER BY CNVR.Chromosome, CNVR.Start, GFF.Start, GFF.End;";
 
     $stmt = $PDO->prepare($query_str);
