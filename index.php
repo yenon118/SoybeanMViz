@@ -102,11 +102,49 @@ include '../header.php';
         </tr>
         <tr>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllTransposableElementsRByGenes.php" method="get" target="_blank">
+                <form action="viewAllTransposableElementsByGenes.php" method="get" target="_blank">
                     <h2>Search by Gene IDs</h2>
                     <br />
                     <label for="gene_id_3"><b>Gene IDs</b><span>&nbsp;(eg Glyma.01G000100 Glyma.02G001700 Glyma.03G018100)</span></label>
                     <textarea id="gene_id_3" name="gene_id_3" rows="12" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01G000100&#10;Glyma.02G001700&#10;Glyma.03G018100"></textarea>
+                    <br />
+                    <br />
+                    <input type="submit" value="Search">
+                </form>    
+            </td>
+            <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
+                <form action="viewAllTransposableElementsByElements.php" method="get" target="_blank">
+                    <h2>Search by Elements</h2>
+                    <br />
+                    <label for="element_3"><b>Elements</b><span>&nbsp;(eg rnd-1_family-184 rnd-1_family-241 rnd-1_family-237)</span></label>
+                    <textarea id="element_3" name="element_3" rows="12" cols="50" placeholder="&#10;Please separate each element into a new line. &#10;&#10;Example:&#10;rnd-1_family-184&#10;rnd-1_family-241&#10;rnd-1_family-237&#10;rnd-1_family-103"></textarea>
+                    <br />
+                    <br />
+                    <input type="submit" value="Search">
+                </form>    
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
+                <form action="viewAllTransposableElementsByChromosomeAndRegion.php" method="get" target="_blank">
+                    <h2>Search By Chromosome and Region</h2>
+                    <br />
+                    <label for="chromosome_3"><b>Chromosome:</b> (eg Chr01)</label>
+                    <input type="text" id="chromosome_3" name="chromosome_3" size="60">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <label for="position_start_3"><b>Starting Position:</b> (eg 41175001)</label>
+                    <input type="text" id="position_start_3" name="position_start_3" size="60">
+                    <br />
+                    <br />
+                    <label for="position_end_3"><b>Ending Position:</b> (eg 41775000)</label>
+                    <input type="text" id="position_end_3" name="position_end_3" size="60">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <input type="submit" value="Search">

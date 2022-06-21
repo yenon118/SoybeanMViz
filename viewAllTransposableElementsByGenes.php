@@ -101,7 +101,7 @@ if(isset($gene_result_arr) && is_array($gene_result_arr) && !empty($gene_result_
         // Construct transposable element sql query string
         $query_str = "SELECT GFF.Chromosome, GFF.Start AS Gene_Start, GFF.End AS Gene_End, GFF.Strand AS Gene_Strand, GFF.Name AS Gene_ID, ";
         // $query_str = $query_str . "TE.Divergence_Percentage AS TE_Divergence_Percentage, TE.Deletion_Percentage AS TE_Deletion_Percentage, TE.Insertion_Percentage AS TE_Insertion_Percentage, ";
-        $query_str = $query_str . "TE.Start AS TE_Start, TE.End AS TE_End, TE.Element AS TE_Element, TE.Family AS TE_Family ";
+        $query_str = $query_str . "TE.Start AS TE_Start, TE.End AS TE_End, TE.Length AS TE_Length, TE.Element AS TE_Element, TE.Family AS TE_Family ";
         // $query_str = $query_str . "TE.Position_Repeat_Start AS TE_Position_Repeat_Start, TE.Position_Repeat_End AS TE_Position_Repeat_End ";
         $query_str = $query_str . "FROM soykb.mViz_Soybean_GFF AS GFF ";
         $query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_TE AS TE ";
@@ -138,16 +138,19 @@ if(isset($gene_result_arr) && is_array($gene_result_arr) && !empty($gene_result_
                 foreach ($te_result_arr[$j] as $key => $value) {
                     echo "<td style=\"border:1px solid black; min-width:80px;\">" . $value . "</td>";
                 }
-                echo "<td style=\"border:1px solid black; min-width:80px;\"><a href=\"assets/TE_sequences/" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Family']) . "/" . $te_result_arr[$j]['Chromosome'] . "_" . $te_result_arr[$j]['TE_Start'] . "_" . $te_result_arr[$j]['TE_End'] . "_" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Element']) . ".fasta\" target=\"_blank\"><button>Download Sequence</button></a></td>";
-                
+
+                if (file_exists("assets/TE_sequences/" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Family']) . "/" . $te_result_arr[$j]['Chromosome'] . "_" . $te_result_arr[$j]['TE_Start'] . "_" . $te_result_arr[$j]['TE_End'] . "_" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Element']) . ".fasta")) {
+                    echo "<td style=\"border:1px solid black; min-width:80px;\"><a href=\"assets/TE_sequences/" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Family']) . "/" . $te_result_arr[$j]['Chromosome'] . "_" . $te_result_arr[$j]['TE_Start'] . "_" . $te_result_arr[$j]['TE_End'] . "_" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Element']) . ".fasta\" target=\"_blank\"><button>Download Sequence</button></a></td>";
+                } else {
+                    echo "<td style=\"border:1px solid black; min-width:80px;\">-</td>";
+                }
+
                 $te_family = preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Family']);
 
-                if ($te_family == "DNA_RC") {
-                    echo "<td style=\"border:1px solid black; min-width:80px;\">-</td>";
-                } else if ($te_family == "LTR_Unknown") {
-                    echo "<td style=\"border:1px solid black; min-width:80px;\">-</td>";
-                } else {
+                if (file_exists("assets/TE_reference_sequences/" . $te_family . "/" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Element']) . ".fasta")) {
                     echo "<td style=\"border:1px solid black; min-width:80px;\"><a href=\"assets/TE_reference_sequences/" . $te_family . "/" . preg_replace("/[^[:alnum:][:space:]]/u", '_', $te_result_arr[$j]['TE_Element']) . ".fasta\" target=\"_blank\"><button>Download Reference Sequence</button></a></td>";
+                } else {
+                    echo "<td style=\"border:1px solid black; min-width:80px;\">-</td>";
                 }
 
                 echo "</tr>";
