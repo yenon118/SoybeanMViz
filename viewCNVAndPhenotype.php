@@ -28,10 +28,12 @@ include './php/pdoResultFilter.php';
 $chromosome_1 = $_GET['chromosome_1'];
 $position_start_1 = $_GET['position_start_1'];
 $position_end_1 = $_GET['position_end_1'];
+$cnv_data_option_1 = $_GET['cnv_data_option_1'];
 
 $chromosome_1 = trim($chromosome_1);
 $position_start_1 = intval(trim($position_start_1));
 $position_end_1 = intval(trim($position_end_1));
+$cnv_data_option_1 = trim($cnv_data_option_1);
 
 ?>
 
@@ -41,19 +43,28 @@ echo "<div id=\"accordion\">";
 echo "<h3>Region</h3>";
 echo "<div>";
 echo "<label for=\"chromosome_1\">Chromosome:</label>";
-echo "<input type=\"text\" id=\"chromosome_1\" name=\"chromosome_1\" size=\"30\" value=\"" . $chromosome_1 . "\" style=\"margin-right:150px;\">";
+echo "<input type=\"text\" id=\"chromosome_1\" name=\"chromosome_1\" size=\"30\" value=\"" . $chromosome_1 . "\" style=\"margin-right:100px;\">";
 
 echo "<label for=\"position_start_1\">Start:</label>";
-echo "<input type=\"text\" id=\"position_start_1\" name=\"position_start_1\" size=\"30\" value=\"" . $position_start_1 . "\" style=\"margin-right:150px;>";
+echo "<input type=\"text\" id=\"position_start_1\" name=\"position_start_1\" size=\"30\" value=\"" . $position_start_1 . "\" style=\"margin-right:100px;\">";
 
 echo "<label for=\"position_end_1\">End:</label>";
-echo "<input type=\"text\" id=\"position_end_1\" name=\"position_end_1\" size=\"30\" value=\"" . $position_end_1 . "\">";
+echo "<input type=\"text\" id=\"position_end_1\" name=\"position_end_1\" size=\"30\" value=\"" . $position_end_1 . "\" style=\"margin-right:100px;\">";
+
+echo "<label for=\"cnv_data_option_1\"><b>Data Option:</b></label>";
+echo "<select name=\"cnv_data_option_1\" id=\"cnv_data_option_1\">";
+echo "<option value=\"Individual_Hits\" " . (($cnv_data_option_1 == "Individual_Hits") ? "selected" : "") . ">Individual Hits</option>";
+echo "<option value=\"Consensus_Regions\" " . (($cnv_data_option_1 == "Consensus_Regions") ? "selected" : "") . ">Consensus Regions</option>";
+echo "</select>";
+
 echo "</div>";
 echo "<h3>CN</h3>";
 echo "<div>";
 echo "<input type=\"checkbox\" id=\"CN0\" name=\"CN0\" value=\"CN0\"><label for=\"CN0\" style=\"margin-right:10px;\">CN0</label>";
 echo "<input type=\"checkbox\" id=\"CN1\" name=\"CN1\" value=\"CN1\"><label for=\"CN1\" style=\"margin-right:10px;\">CN1</label>";
-echo "<input type=\"checkbox\" id=\"CN2\" name=\"CN2\" value=\"CN2\"><label for=\"CN2\" style=\"margin-right:10px;\">CN2</label>";
+if ($cnv_data_option_1 == "Consensus_Regions") {
+    echo "<input type=\"checkbox\" id=\"CN2\" name=\"CN2\" value=\"CN2\"><label for=\"CN2\" style=\"margin-right:10px;\">CN2</label>";
+}
 echo "<input type=\"checkbox\" id=\"CN3\" name=\"CN3\" value=\"CN3\"><label for=\"CN3\" style=\"margin-right:10px;\">CN3</label>";
 echo "<input type=\"checkbox\" id=\"CN4\" name=\"CN4\" value=\"CN4\"><label for=\"CN4\" style=\"margin-right:10px;\">CN4</label>";
 echo "<input type=\"checkbox\" id=\"CN5\" name=\"CN5\" value=\"CN5\"><label for=\"CN5\" style=\"margin-right:10px;\">CN5</label>";
@@ -181,17 +192,17 @@ echo "<br/><br/>";
 echo "<div style='margin-top:10px;' align='center'>";
 echo "<button onclick=\"uncheck_all()\" style=\"margin-right:20px;\">Uncheck All</button>";
 echo "<button onclick=\"check_all()\" style=\"margin-right:20px;\">Check All</button>";
-echo "<button onclick=\"qeuryCNVRAndPhenotype()\" style=\"margin-right:20px;\">View Data</button>";
-echo "<button onclick=\"downloadCNVRAndPhenotype()\" style=\"margin-right:20px;\">Download Data</button>";
+echo "<button onclick=\"qeuryCNVAndPhenotype()\" style=\"margin-right:20px;\">View Data</button>";
+echo "<button onclick=\"downloadCNVAndPhenotype()\" style=\"margin-right:20px;\">Download Data</button>";
 echo "</div>";
 echo "<br/><br/>";
 
-echo "<div id=\"CNVR_and_Phenotye_detail_table\" style='width:auto; height:auto; overflow:visible; max-height:1000px; display:inline-block;'></div>";
+echo "<div id=\"CNV_and_Phenotye_detail_table\" style='width:auto; height:auto; overflow:visible; max-height:1000px; display:inline-block;'></div>";
 
 ?>
 
 
-<script type="text/javascript" language="javascript" src="./js/viewCNVRAndPhenotype.js"></script>
+<script type="text/javascript" language="javascript" src="./js/viewCNVAndPhenotype.js"></script>
 
 
 <?php include '../footer.php'; ?>

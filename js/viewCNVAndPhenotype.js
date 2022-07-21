@@ -85,16 +85,17 @@ function constructInfoTable(res) {
 }
 
 
-function qeuryCNVRAndPhenotype() {
+function qeuryCNVAndPhenotype() {
 
     // Clear data appended to the div tags, if there is any
-    if (document.getElementById('CNVR_and_Phenotye_detail_table').innerHTML) {
-        document.getElementById('CNVR_and_Phenotye_detail_table').innerHTML = null;
+    if (document.getElementById('CNV_and_Phenotye_detail_table').innerHTML) {
+        document.getElementById('CNV_and_Phenotye_detail_table').innerHTML = null;
     }
 
     let chromosome_1 = document.getElementById('chromosome_1').value;
     let position_start_1 = document.getElementById('position_start_1').value;
     let position_end_1 = document.getElementById('position_end_1').value;
+    let cnv_data_option_1 = document.getElementById("cnv_data_option_1").value;
 
     let cn_ids = document.querySelectorAll('input[id^=CN]');
     let cn_array = [];
@@ -117,13 +118,14 @@ function qeuryCNVRAndPhenotype() {
 
     if (chromosome_1 && position_start_1 && position_end_1 && cn_array.length > 0 && phenotype_array.length > 0) {
         $.ajax({
-            url: './php/qeuryCNVRAndPhenotype.php',
+            url: './php/qeuryCNVAndPhenotype.php',
             type: 'GET',
             contentType: 'application/json',
             data: {
                 Chromosome: chromosome_1,
                 Start: position_start_1,
                 End: position_end_1,
+                Data_Option: cnv_data_option_1,
                 CN: cn_array,
                 Phenotype: phenotype_array
             },
@@ -132,15 +134,15 @@ function qeuryCNVRAndPhenotype() {
                 res = res.data;
 
                 if (res.length > 0) {
-                    document.getElementById('CNVR_and_Phenotye_detail_table').appendChild(
+                    document.getElementById('CNV_and_Phenotye_detail_table').appendChild(
                         constructInfoTable(res)
                     );
-                    document.getElementById('CNVR_and_Phenotye_detail_table').style.overflow = 'scroll';
+                    document.getElementById('CNV_and_Phenotye_detail_table').style.overflow = 'scroll';
                 } else {
                     let error_message = document.createElement("p");
                     error_message.innerHTML = "Please select CN and phenotype!!!";
-                    document.getElementById('CNVR_and_Phenotye_detail_table').appendChild(error_message);
-                    document.getElementById('CNVR_and_Phenotye_detail_table').style.overflow = 'visible';
+                    document.getElementById('CNV_and_Phenotye_detail_table').appendChild(error_message);
+                    document.getElementById('CNV_and_Phenotye_detail_table').style.overflow = 'visible';
                 }
                 
             },
@@ -151,18 +153,19 @@ function qeuryCNVRAndPhenotype() {
     } else {
         let error_message = document.createElement("p");
         error_message.innerHTML = "Please select CN and phenotype!!!";
-        document.getElementById('CNVR_and_Phenotye_detail_table').appendChild(error_message);
-        document.getElementById('CNVR_and_Phenotye_detail_table').style.overflow = 'visible';
+        document.getElementById('CNV_and_Phenotye_detail_table').appendChild(error_message);
+        document.getElementById('CNV_and_Phenotye_detail_table').style.overflow = 'visible';
     }
 
 }
 
 
-function downloadCNVRAndPhenotype() {
+function downloadCNVAndPhenotype() {
 
     let chromosome_1 = document.getElementById('chromosome_1').value;
     let position_start_1 = document.getElementById('position_start_1').value;
     let position_end_1 = document.getElementById('position_end_1').value;
+    let cnv_data_option_1 = document.getElementById("cnv_data_option_1").value;
 
     let cn_ids = document.querySelectorAll('input[id^=CN]');
     let cn_array = [];
@@ -185,13 +188,14 @@ function downloadCNVRAndPhenotype() {
 
     if (chromosome_1 && position_start_1 && position_end_1 && cn_array.length > 0 && phenotype_array.length > 0) {
         $.ajax({
-            url: './php/qeuryCNVRAndPhenotype.php',
+            url: './php/qeuryCNVAndPhenotype.php',
             type: 'GET',
             contentType: 'application/json',
             data: {
                 Chromosome: chromosome_1,
                 Start: position_start_1,
                 End: position_end_1,
+                Data_Option: cnv_data_option_1,
                 CN: cn_array,
                 Phenotype: phenotype_array
             },

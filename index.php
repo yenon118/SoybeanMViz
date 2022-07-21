@@ -38,40 +38,40 @@ include '../header.php';
         </tr>
         <tr>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllCNVRByChromosomeAndRegion.php" method="get" target="_blank">
-                    <h2>Search By Chromosome and Region</h2>
+                <form action="viewAllCNVByGenes.php" method="get" target="_blank">
+                    <h2>Search by Gene IDs</h2>
                     <br />
-                    <label for="chromosome_1"><b>Chromosome:</b> (eg Chr01)</label>
-                    <input type="text" id="chromosome_1" name="chromosome_1" size="60">
-                    <br />
-                    <br />
+                    <label for="gene_id_2"><b>Gene IDs</b><span>&nbsp;(eg Glyma.01G000100 Glyma.02G001700 Glyma.03G018100)</span></label>
+                    <textarea id="gene_id_2" name="gene_id_2" rows="12" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01G000100&#10;Glyma.02G001700&#10;Glyma.03G018100"></textarea>
                     <br />
                     <br />
-                    <label for="position_start_1"><b>Starting Position:</b> (eg 41175001)</label>
-                    <input type="text" id="position_start_1" name="position_start_1" size="60">
-                    <br />
-                    <br />
-                    <label for="position_end_1"><b>Ending Position:</b> (eg 41775000)</label>
-                    <input type="text" id="position_end_1" name="position_end_1" size="60">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                    <label for="cnv_data_option_2"><b>Data Option:</b></label>
+                    <select name="cnv_data_option_2" id="cnv_data_option_2">
+                        <option value="Individual_Hits">Individual Hits</option>
+                        <option value="Consensus_Regions" selected>Consensus Regions</option>
+                    </select>
                     <br />
                     <br />
                     <input type="submit" value="Search">
                 </form>
             </td>
             <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllCNVRByAccessionAndCopyNumbers.php" method="get" target="_blank">
+                <form action="viewAllCNVByAccessionAndCopyNumbers.php" method="get" target="_blank">
                     <h2>Search By Accession and Copy Numbers</h2>
                     <br />
-                    <label for="accession_1"><b>Accession:</b> (eg PI_479752)</label>
-                    <input type="text" id="accession_1" name="accession_1" size="60">
+                    <label for="accession_2"><b>Accession:</b> (eg PI_479752)</label>
+                    <input type="text" id="accession_2" name="accession_2" size="60">
                     <br />
                     <br />
-                    <label for="copy_number_1"><b>Copy Numbers:</b> (eg CN0 CN1 CN3 CN4 CN5 CN6 CN7 CN8)</label>
-                    <textarea id="copy_number_1" name="copy_number_1" rows="10" cols="50" placeholder="&#10;Please separate each copy number into a new line. &#10;&#10;Example:&#10;CN0&#10;CN1&#10;CN3&#10;&#10;**CN2 represents normal."></textarea>
+                    <label for="copy_number_2"><b>Copy Numbers:</b> (eg CN0 CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8)</label>
+                    <textarea id="copy_number_2" name="copy_number_2" rows="10" cols="50" placeholder="&#10;Please separate each copy number into a new line. &#10;&#10;Example:&#10;CN0&#10;CN1&#10;CN3&#10;&#10; * CN2 represents normal.&#10;** CN2 is not in individual hits dataset."></textarea>
+                    <br />
+                    <br />
+                    <label for="cnv_data_option_2"><b>Data Option:</b></label>
+                    <select name="cnv_data_option_2" id="cnv_data_option_2">
+                        <option value="Individual_Hits">Individual Hits</option>
+                        <option value="Consensus_Regions" selected>Consensus Regions</option>
+                    </select>
                     <br />
                     <br />
                     <input type="submit" value="Search">
@@ -79,16 +79,31 @@ include '../header.php';
             </td>
         </tr>
         <tr>
-            <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
-                <form action="viewAllCNVRByGenes.php" method="get" target="_blank">
-                    <h2>Search by Gene IDs</h2>
+        <td width="50%" align="center" valign="top" style="border:1px solid #999999; padding:10px; background-color:#f8f8f8; text-align:left;">
+                <form action="viewAllCNVByChromosomeAndRegion.php" method="get" target="_blank">
+                    <h2>Search By Chromosome and Region</h2>
                     <br />
-                    <label for="gene_id_2"><b>Gene IDs</b><span>&nbsp;(eg Glyma.01G000100 Glyma.02G001700 Glyma.03G018100)</span></label>
-                    <textarea id="gene_id_2" name="gene_id_2" rows="12" cols="50" placeholder="&#10;Please separate each gene into a new line. &#10;&#10;Example:&#10;Glyma.01G000100&#10;Glyma.02G001700&#10;Glyma.03G018100"></textarea>
+                    <label for="chromosome_2"><b>Chromosome:</b> (eg Chr01)</label>
+                    <input type="text" id="chromosome_2" name="chromosome_2" size="60">
+                    <br />
+                    <br />
+                    <label for="position_start_2"><b>Starting Position:</b> (eg 41175001)</label>
+                    <input type="text" id="position_start_2" name="position_start_2" size="60">
+                    <br />
+                    <br />
+                    <label for="position_end_2"><b>Ending Position:</b> (eg 41775000)</label>
+                    <input type="text" id="position_end_2" name="position_end_2" size="60">
+                    <br />
+                    <br />
+                    <label for="cnv_data_option_2"><b>Data Option:</b></label>
+                    <select name="cnv_data_option_2" id="cnv_data_option_2">
+                        <option value="Individual_Hits">Individual Hits</option>
+                        <option value="Consensus_Regions" selected>Consensus Regions</option>
+                    </select>
                     <br />
                     <br />
                     <input type="submit" value="Search">
-                </form>    
+                </form>
             </td>
         </tr>
         <tr>
@@ -133,18 +148,12 @@ include '../header.php';
                     <input type="text" id="chromosome_3" name="chromosome_3" size="60">
                     <br />
                     <br />
-                    <br />
-                    <br />
                     <label for="position_start_3"><b>Starting Position:</b> (eg 41175001)</label>
                     <input type="text" id="position_start_3" name="position_start_3" size="60">
                     <br />
                     <br />
                     <label for="position_end_3"><b>Ending Position:</b> (eg 41775000)</label>
                     <input type="text" id="position_end_3" name="position_end_3" size="60">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                     <br />
                     <br />
                     <input type="submit" value="Search">

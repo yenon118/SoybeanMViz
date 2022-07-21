@@ -6,6 +6,7 @@ include 'pdoResultFilter.php';
 $chromosome = $_GET['Chromosome'];
 $position_start = $_GET['Start'];
 $position_end = $_GET['End'];
+$data_option = $_GET['Data_Option'];
 $cn = $_GET['CN'];
 $phenotype = $_GET['Phenotype'];
 
@@ -40,20 +41,26 @@ if (is_string($phenotype)) {
 
 
 // Construct query string
-$query_str = "SELECT CNVR.Chromosome, CNVR.Start, CNVR.End, CNVR.Width, CNVR.Strand, AM.SoyKB_Accession AS Accession, CNVR.CN ";
+$query_str = "SELECT CNV.Chromosome, CNV.Start, CNV.End, CNV.Width, CNV.Strand, AM.SoyKB_Accession AS Accession, CNV.CN ";
 for ($i = 0; $i < count($phenotype_array); $i++) {
     $query_str = $query_str . ", G." . $phenotype_array[$i] . " ";
 }
-$query_str = $query_str . "FROM soykb.mViz_Soybean_CNVR AS CNVR ";
+$query_str = $query_str . "FROM ";
+if ($data_option == "Individual_Hits") {
+    $query_str = $query_str . "soykb.mViz_Soybean_CNVS ";
+} else if ($data_option == "Consensus_Regions") {
+    $query_str = $query_str . "soykb.mViz_Soybean_CNVR ";
+}
+$query_str = $query_str . "AS CNV ";
 $query_str = $query_str . "LEFT JOIN soykb.mViz_Soybean_Accession_Mapping AS AM ";
-$query_str = $query_str . "ON CNVR.Accession = AM.Accession ";
+$query_str = $query_str . "ON CNV.Accession = AM.Accession ";
 $query_str = $query_str . "LEFT JOIN soykb.germplasm AS G ";
 $query_str = $query_str . "ON AM.GRIN_Accession = G.ACNO ";
-$query_str = $query_str . "WHERE (CNVR.Chromosome = '" . $chromosome . "') ";
-$query_str = $query_str . "AND (CNVR.Start BETWEEN " . $position_start . " AND " . $position_end . ") ";
-$query_str = $query_str . "AND (CNVR.End BETWEEN " . $position_start . " AND " . $position_end . ") ";
+$query_str = $query_str . "WHERE (CNV.Chromosome = '" . $chromosome . "') ";
+$query_str = $query_str . "AND (CNV.Start BETWEEN " . $position_start . " AND " . $position_end . ") ";
+$query_str = $query_str . "AND (CNV.End BETWEEN " . $position_start . " AND " . $position_end . ") ";
 if (count($cn_array) > 0) {
-    $query_str = $query_str . "AND (CNVR.CN IN ('";
+    $query_str = $query_str . "AND (CNV.CN IN ('";
     for ($i = 0; $i < count($cn_array); $i++) {
         if($i < (count($cn_array)-1)){
             $query_str = $query_str . trim($cn_array[$i]) . "', '";
@@ -63,7 +70,7 @@ if (count($cn_array) > 0) {
     }
     $query_str = $query_str . "')) ";
 }
-$query_str = $query_str . "ORDER BY CNVR.CN, CNVR.Chromosome, CNVR.Start, CNVR.End, AM.SoyKB_Accession; ";
+$query_str = $query_str . "ORDER BY CNV.CN, CNV.Chromosome, CNV.Start, CNV.End, AM.SoyKB_Accession; ";
 
 
 $stmt = $PDO->prepare($query_str);
