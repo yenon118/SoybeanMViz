@@ -41,7 +41,18 @@ if (is_string($phenotype)) {
 
 
 // Construct query string
-$query_str = "SELECT CNV.Chromosome, CNV.Start, CNV.End, CNV.Width, CNV.Strand, AM.SoyKB_Accession AS Accession, CNV.CN ";
+$query_str = "SELECT CNV.Chromosome, CNV.Start, CNV.End, CNV.Width, CNV.Strand, AM.SoyKB_Accession AS Accession, CNV.CN, ";
+$query_str = $query_str . "CASE CNV.CN ";
+$query_str = $query_str . "WHEN 'CN0' THEN 'Loss' ";
+$query_str = $query_str . "WHEN 'CN1' THEN 'Loss' ";
+$query_str = $query_str . "WHEN 'CN3' THEN 'Gain' ";
+$query_str = $query_str . "WHEN 'CN4' THEN 'Gain' ";
+$query_str = $query_str . "WHEN 'CN5' THEN 'Gain' ";
+$query_str = $query_str . "WHEN 'CN6' THEN 'Gain' ";
+$query_str = $query_str . "WHEN 'CN7' THEN 'Gain' ";
+$query_str = $query_str . "WHEN 'CN8' THEN 'Gain' ";
+$query_str = $query_str . "ELSE 'Normal' ";
+$query_str = $query_str . "END as Status ";
 for ($i = 0; $i < count($phenotype_array); $i++) {
     $query_str = $query_str . ", G." . $phenotype_array[$i] . " ";
 }

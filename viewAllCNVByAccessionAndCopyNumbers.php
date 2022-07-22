@@ -70,8 +70,6 @@ $result = $stmt->fetchAll();
 
 if (count($result) > 0) {
     $result_arr = pdoResultFilter($result);
-} else {
-    echo "No data found!!!";
 }
 
 ?>
@@ -79,33 +77,34 @@ if (count($result) > 0) {
 
 <!-- Render the table -->
 <?php
+echo "<h3>CNV regions and CNs of accession " . $accession_2 . ": </h3>";
+if (isset($result_arr) && is_array($result_arr) && !empty($result_arr) && count($result_arr) > 0) {
+    echo "<div style='width:auto; height:auto; border:3px solid #000; overflow:scroll; max-height:1000px; display:inline-block;'>";
+    echo "<table style='text-align:center;'>";
 
-    if (count($result_arr) > 0) {
-        echo "<div style='width:auto; height:auto; border:3px solid #000; overflow:scroll; max-height:1000px; display:inline-block;'>";
-        echo "<table style='text-align:center;'>";
+    // Table header
+    echo "<tr>";
+    foreach ($result_arr[0] as $key => $value) {
+        echo "<th style=\"border:1px solid black;\">" . strval($key) . "</th>";
+    }
+    echo "</tr>";
 
-        // Table header
-        echo "<tr>";
-        foreach ($result_arr[0] as $key => $value) {
-            echo "<th style=\"border:1px solid black;\">" . strval($key) . "</th>";
+    // Table body
+    for ($i = 0; $i < count($result_arr); $i++) {
+        $tr_bgcolor = ($i % 2 ? "#FFFFFF" : "#DDFFDD");
+
+        echo "<tr bgcolor=\"" . $tr_bgcolor . "\">";
+        foreach ($result_arr[$i] as $key => $value) {
+            echo "<td style=\"border:1px solid black;min-width:120px;\">" . $value . "</td>";
         }
         echo "</tr>";
-
-        // Table body
-        for ($i = 0; $i < count($result_arr); $i++) {
-            $tr_bgcolor = ($i % 2 ? "#FFFFFF" : "#DDFFDD");
-
-            echo "<tr bgcolor=\"" . $tr_bgcolor . "\">";
-            foreach ($result_arr[$i] as $key => $value) {
-                echo "<td style=\"border:1px solid black;min-width:120px;\">" . $value . "</td>";
-            }
-            echo "</tr>";
-        }
-
-        echo "</table>";
-        echo "</div>";
     }
 
+    echo "</table>";
+    echo "</div>";
+} else {
+    echo "<p>No CNV ragion and CN of accession " . $accession_2 . "!!!</p>";
+}
 ?>
 
 
