@@ -52,7 +52,7 @@ function check_all() {
 }
 
 
-function constructInfoTable(res) {
+function constructInfoTable(res, chromosome, position_start, position_end, cnv_data_option, cn_array) {
 
     // Create table
     let detail_table = document.createElement("table");
@@ -61,10 +61,24 @@ function constructInfoTable(res) {
 
     let header_array = Object.keys(res[0]);
     for (let i = 0; i < header_array.length; i++) {
-        var detail_th = document.createElement("th");
-        detail_th.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
-        detail_th.innerHTML = header_array[i];
-        detail_header_tr.appendChild(detail_th);
+
+        if (header_array[i] == "Chromosome" || header_array[i] == "Start" || header_array[i] == "End" || header_array[i] == "Width" || header_array[i] == "Strand" || header_array[i] == "Accession" || header_array[i] == "CN" || header_array[i] == "Status") {
+            var detail_th = document.createElement("th");
+            detail_th.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
+            detail_th.innerHTML = header_array[i];
+            detail_header_tr.appendChild(detail_th);
+        } else {
+            // Create clickable links in the header
+            var detail_th = document.createElement("th");
+            detail_th.setAttribute("style", "border:1px solid black; min-width:80px; height:18.5px;");
+            var detail_a = document.createElement('a');
+            detail_a.target = "_blank";
+            detail_a.href = "/SoybeanMViz/viewCNVAndPhenotypeFigures.php?chromosome_1=" + chromosome + "&position_start_1=" + position_start + "&position_end_1=" + position_end + "&cnv_data_option_1=" + cnv_data_option + "&phenotype_1=" + header_array[i] +"&cn_1=" + cn_array.join("%0D%0A");;
+            detail_a.innerHTML = header_array[i];
+            detail_th.appendChild(detail_a);
+            detail_header_tr.appendChild(detail_th);
+        }
+
     }
 
     detail_table.appendChild(detail_header_tr);
@@ -135,7 +149,7 @@ function qeuryCNVAndPhenotype() {
 
                 if (res.length > 0) {
                     document.getElementById('CNV_and_Phenotye_detail_table').appendChild(
-                        constructInfoTable(res)
+                        constructInfoTable(res, chromosome_1, position_start_1, position_end_1, cnv_data_option_1, cn_array)
                     );
                     document.getElementById('CNV_and_Phenotye_detail_table').style.overflow = 'scroll';
                 } else {
